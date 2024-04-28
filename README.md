@@ -1,6 +1,6 @@
 # git-github
 small guidline clone it and check it out ;) 
-***side note : remember syntax is a meh ,  understand the logic instead , there's pretty usefull links on the website use them*** 
+***side note : remembering syntax is a meh ,  understand the logic instead , there's pretty usefull links on the website use them*** 
 enjoy .
 
 first 
