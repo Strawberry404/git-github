@@ -1,0 +1,767 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How to use Git and Github</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="413b120c-8274-440d-a7cc-a126af697b1b" class="page mono"><header><h1 class="page-title">How to use Git and Github</h1><p class="page-description"></p></header><div class="page-body"><p id="4e426c10-e738-40cf-ba5e-da9fa1ac70c6" class="">
+</p><p id="b74fa958-8657-40ce-91c0-178388faa041" class="">
+</p><blockquote id="38b1229d-2037-473a-9ded-4b933938403e" class=""><mark class="highlight-brown"><em>side note : I’m a big lover of terminals however if you perfer GUI there’s github desktop , it helps in pushing and pulling seeing history etc , on this guidline i will talk more about git shell yet you can use github desktop I’ll leave some usefull links for it down below </em></mark></blockquote><figure id="2405f9d1-3f94-4579-a24e-14d786881f64"><a href="https://docs.github.com/en/desktop/overview/about-github-desktop" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">About GitHub Desktop - GitHub Docs</div><div class="bookmark-description">GitHub Desktop helps you work with projects hosted on GitHub.</div></div><div class="bookmark-href"><img src="https://docs.github.com/assets/cb-345/images/site/favicon.png" class="icon bookmark-icon"/>https://docs.github.com/en/desktop/overview/about-github-desktop</div></div><img src="https://github.githubassets.com/images/modules/open_graph/github-logo.png" class="bookmark-image"/></a></figure><h1 id="7dc1143c-bf32-4d72-abbf-8debdbee1bbe" class=""><mark class="highlight-red">Table of content</mark></h1><ol type="1" id="a8f39638-0219-4e14-bc57-c88140fb3e7e" class="numbered-list" start="1"><li>Introduction </li></ol><ol type="1" id="0b8c760b-ec2b-4418-8773-299a764885aa" class="numbered-list" start="2"><li>Logic</li></ol><ol type="1" id="7d40043d-ba3b-4354-bb5a-84620c23c890" class="numbered-list" start="3"><li>Concepts </li></ol><ol type="1" id="a4b5c778-96aa-4548-b49a-3e9221fe3ab1" class="numbered-list" start="4"><li>Getting started Locally</li></ol><ol type="1" id="c90809fc-4509-496e-8568-cb85c8506dba" class="numbered-list" start="5"><li>git cheatsheet </li></ol><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><mark class="highlight-red">Introduction</mark></summary><div class="indented"><p id="b7169471-cac7-4025-a2d3-3cfefcacbf7c" class="">hello team , we will all use git and github , some more than the others , this will be a chill guide into understanding the basis </p><p id="2060fc8c-50a2-4866-ae45-8fab48bc60bd" class="block-color-pink_background">a youtube video to get a grasp of what going on : <a href="https://www.youtube.com/watch?v=mJ-qvsxPHpY&amp;ab_channel=NickWhite">https://www.youtube.com/watch?v=mJ-qvsxPHpY&amp;ab_channel=NickWhite</a></p><p id="dbfc8a91-dd0d-4da4-b831-aecaa4c29b87" class="block-color-pink_background"><a href="https://ndpsoftware.com/git-cheatsheet.html#loc=stash">honestly this is all what you need</a> a chill website if you like pink </p><figure id="24bae21c-e8a8-443e-8d6f-9b48a8bf01fb"><a href="https://ndpsoftware.com/git-cheatsheet.html#loc=stash" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">NDP Software :: Git Cheatsheet</div><div class="bookmark-description">Interactive Git Cheatsheet, categorizing commands based on what they affect.</div></div><div class="bookmark-href"><img src="https://ndpsoftware.com/favicon.ico" class="icon bookmark-icon"/>https://ndpsoftware.com/git-cheatsheet.html#loc=stash</div></div></a></figure><p id="f18b5a1b-9fcc-436e-99de-df42b587ae5e" class=""><strong><span style="border-bottom:0.05em solid">wanna play a little before pushing on the repo ?<br/><br/></span></strong>here’s an open source project to play on </p><figure id="32054fd1-3384-4a00-b61f-132b1b98549f"><div class="source">https://github.com/Strawberry404/driwwwle</div></figure><p id="d19c7124-9d2d-4b03-9928-1014b8411079" class=""><a href="https://driwwwle.com/">https://driwwwle.com/</a></p><p id="d2ec06f0-1903-4e84-8234-cd905f3db180" class="">
+</p><p id="3e7f12af-a43e-4f2c-976f-1bf2d85344d8" class="block-color-orange">for front end developers  : </p><p id="8fd78709-5999-47a2-808f-9b11974c9b8a" class="block-color-orange">some pages code in this repo is made by nextjs and react , if u find a way to switch it to vuejs + faster than the actuall coding of it then go for it </p><p id="53caf058-ef08-480c-8197-e6f3c5a55dbc" class="">
+</p><p id="792d3c4c-b317-4b0d-8f48-8e756b12ef5a" class="block-color-pink">for backend divelopers : </p><p id="2065cdc5-f485-482c-beab-3259849aa71e" class="block-color-pink">I dunno if this will help you </p><p id="a4cde170-232c-4c7c-bf03-5f54b301b17b" class="block-color-pink">
+</p><h3 id="a64764cc-5f00-4b1b-8138-feca55381d95" class=""><mark class="highlight-teal"><strong>Git and GitHub Guide for Developers</strong></mark></h3><figure id="1e72c135-8062-4f95-9160-daca08737c47" class="image"><a href="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/Untitled.png"><img style="width:687px" src="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/Untitled.png"/></a><figcaption>Thins follow this generally </figcaption></figure><h2 id="1e13557f-f1a5-4ca0-99a3-60b207f910e9" class=""><mark class="highlight-red">Logic :</mark></h2><p id="3704bd07-bf7a-4566-b110-6c07292ab1f5" class=""><mark class="highlight-teal">when you first start working :</mark></p><ul id="6fdab200-817a-4bd0-b102-46b48fa1f2ee" class="bulleted-list"><li style="list-style-type:disc"> you make the code in your machine</li></ul><ul id="29e50e42-3664-46ca-a990-c85ccb75830d" class="bulleted-list"><li style="list-style-type:disc"> you add git to it so it can track the progress (rememeber git can work just fine without interacting with the internet github came as a “hub” for collaboration using “git ”)</li></ul><ul id="485b44c1-8d81-4f66-826e-ef5d92383755" class="bulleted-list"><li style="list-style-type:disc">, within the process you can create a history of what you did and each time you make a major change or a smaller one you commit it so if something happens afterwards you can go back to the pevious version of code (like going back on a youtube video). </li></ul><ul id="69a27556-93e6-4370-8b09-ece99877153f" class="bulleted-list"><li style="list-style-type:disc">if you want to add a new feature and u don’t want the app to crash or something , you can make another branch and work on it </li></ul><p id="ed419222-7227-445c-88fd-ddb9d1de6943" class="">
+</p><p id="7c75169f-74fe-4c90-ab52-f311ff6630a8" class=""><mark class="highlight-teal">then comes connecting with your team :</mark></p><ul id="43abfba9-62f6-4849-b8a4-ef405813b89e" class="bulleted-list"><li style="list-style-type:disc">you push the code on specific branch <p id="7faaff38-9ca7-400f-a54a-dcb7716b90cc" class=""><mark class="highlight-pink"><em><strong>to denote : </strong></em></mark></p></li></ul><ul id="45baf310-faf3-4dcb-9093-d296295aab30" class="bulleted-list"><li style="list-style-type:disc">rememember in working with others everyone is coding fa you need to stay up to date always , so each time you wanna start coding pull the latest version of code from github and start creating beyond imagination </li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><mark class="highlight-red">Concepts : </mark></summary><div class="indented"><h3 id="93523120-f752-4abd-b706-c2d9cd2584a8" class=""><mark class="highlight-teal">Branches </mark></h3><ul id="c5dfc187-1081-4b5f-8d2b-00e2247cd274" class="bulleted-list"><li style="list-style-type:disc">Main essential and latest version of all : each time we pull this version as it’s the most stable one before starting to work <figure id="4996398a-dbed-42da-9b05-fd37830b496c" class="image"><a href="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/155993572204-gitflow.webp"><img style="width:680.0000610351562px" src="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/155993572204-gitflow.webp"/></a></figure><p id="9b875791-ccee-4bf2-9cd9-5c9b712f0ffe" class=""><mark class="highlight-red"><strong>important note : it’s okey to  pull from master but never ever push to master(ra kan9ssd) </strong></mark></p><p id="c3bd49d0-0549-49ff-a3bd-e849283bd417" class="">
+</p><p id="7f0229f4-847e-4059-9fde-37213c4ba3b3" class="">
+</p><p id="9eb8e81d-cc46-4d80-9746-c29da552a7a4" class="">1-yes you can add branches , lemme know when you do so </p><p id="f02c3154-b7bb-44de-a467-d7eb759df998" class="">2- here’s our branches structure :</p><figure id="f2397ebb-7070-43ce-87e8-096ed49c78bb" class="image"><a href="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/Untitled%201.png"><img style="width:680.0000610351562px" src="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/Untitled%201.png"/></a></figure><p id="0bb5fdc2-3073-457e-b9a3-5906c47b50c4" class="">you work on your own branch on daily and once you and your teamate comes to some point each time something is done u push it into the backend gloabl so the test ppl can take it and test it our and then for security to do security checks ( there’s cases when test will take only the code of one of the members and do the test )all of this is quite manageable and flexible</p></li></ul><h3 id="76418686-ce7d-46ee-a0ff-49b28034d052" class=""><mark class="highlight-teal">Commits : </mark></h3><ul id="9552f55b-3201-4a6a-b78b-c72a858f201a" class="bulleted-list"><li style="list-style-type:disc">Each commit records changes made since the last commit was recorded, all together building a comprehensive history of the project&#x27;s development journey.</li></ul><ul id="d615d7e7-2433-449e-9577-a67270e8539f" class="bulleted-list"><li style="list-style-type:disc">git show id of the commit<figure id="114a1a71-61aa-44a2-8a28-173361d1c27d" class="image"><a href="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/Screenshot1109.png"><img style="width:680.0000610351562px" src="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/Screenshot1109.png"/></a></figure></li></ul><p id="8e722162-e51e-4ab2-9a2d-27944bfcaecf" class=""><mark class="highlight-yellow"><em><strong>command line : you will find them down below </strong></em></mark></p><p id="904a7929-1fe9-4cf0-b6a0-6d8c1d912412" class="">
+</p><h3 id="95157215-35d0-48eb-b611-41c72b7b475a" class=""><mark class="highlight-teal">Tags :</mark></h3><p id="0dc931cf-5bee-48d7-b24c-145587312354" class="">Git <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging">tags</a> serve as landmarks within the Git history, typically marking significant milestones in a project&#x27;s development, such as <code>releases</code>, <code>versions</code>, or <code>standout commits</code>. These tags are invaluable for marking specific points in time, often representing the starting points or major achievements in a project&#x27;s journey.</p><p id="10fdde01-d8d8-4d14-9acd-bde9d80abb76" class=""><em><strong><mark class="highlight-yellow">note: no need for them now , once you get accustumed with the norms then you can add these</mark></strong></em></p><p id="df9f4eb4-eb94-4b54-a80c-3e409ff01017" class="">
+</p><figure id="ab819d1b-d441-46ff-b97f-1542a77d6897" class="image"><a href="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/Qu44S.png"><img style="width:707.9861450195312px" src="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/Qu44S.png"/></a></figure><h3 id="8ce58019-613a-46a7-8e86-341064ab457d" class=""><mark class="highlight-teal">HEAD :</mark></h3><p id="ff32d9c1-20f8-48aa-8c2d-c2bba7d87a83" class="">the most recent commit on the currently checked out branch</p><figure id="63f2ec06-6498-4522-9d35-c32b10e2cd0f" class="image"><a href="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/images.png"><img style="width:281px" src="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/images.png"/></a></figure><h2 id="7b26375b-c8f5-4645-abca-da4736257d28" class=""><mark class="highlight-teal">Stages :</mark></h2><h3 id="8795b54c-9159-4e6b-841a-22f420e20124" class="">Working directory 👷</h3><p id="eca7d338-f254-409c-b78f-ff03acf5e656" class="">The <code>working directory</code> is where you edit, modify, and create files for your project. Representing the current state of your files on your local machine.</p><h3 id="97bff64d-b48b-45cf-89c1-d9b3f73fe24b" class="">Staging area 🚉</h3><p id="af5e1d0a-be74-4cf9-b60c-ec9c9c18b40f" class="">The <code>staging</code> area is like a holding area or a pre-commit zone where you prepare your changes before committing them to the repository.</p><blockquote id="bb719930-24b3-4e31-a4b0-fdcba8c8378e" class="">Useful command here: git add<p id="5adf503f-baf2-4485-a326-ced54283658d" class="">Also <code>git rm</code> can be used to unstage changes</p></blockquote><h3 id="0732733f-f05b-4867-952f-e032fb29421d" class="">Local repository 🗄️</h3><p id="3da60397-90d7-4dc1-9f35-d9c1fd864c91" class="">The local repository is where Git permanently stores the committed changes. It allows you to review your project&#x27;s history, revert to previous states, and collaborate with others on the same codebase.</p><blockquote id="7d22994e-31fc-4133-80e3-995c5ac57d88" class="">You can commit changes that are ready in the staging area with: git commit</blockquote><h3 id="b3a94886-157d-44ba-8487-e464cca157bd" class="">Remote repository 🛫</h3><p id="68749af7-792c-4280-93ee-235687e7f4bd" class="">The remote repository is a centralized location, typically hosted on a server (like GitHub, GitLab, or Bitbucket), where you can share and collaborate with others on your project.</p><blockquote id="84c0c098-9d06-4bda-8d78-67e0145ee45d" class="">You can use commands like git push and git pull to push/pull your committed changes from your local repository to the remote repository.</blockquote><ol type="1" id="6007fb89-8071-4a3e-afb5-7d581dabbca9" class="block-color-brown_background numbered-list" start="1"><li><strong>Repository Organization</strong><ul id="3f6b4875-16ab-42eb-8f6d-23a2b99c56cc" class="bulleted-list"><li style="list-style-type:disc">File Structure: Keep your repository organized by placing files in logical directories.(when u try pushing the code make your file w sf for the moment)<ul id="8f1c2eb9-bf22-48ff-b16c-fe21b20ee02f" class="bulleted-list"><li style="list-style-type:circle">Server </li></ul><ul id="db7d91dd-6023-4b4e-9e89-b4f2cdf7d1ea" class="bulleted-list"><li style="list-style-type:circle">front end </li></ul><ul id="ef290627-e4a1-41da-8f50-a58186fdd24d" class="bulleted-list"><li style="list-style-type:circle">backend </li></ul><ul id="eef311c3-7303-433b-995d-4dcd506d123b" class="bulleted-list"><li style="list-style-type:circle">.gitignore </li></ul></li></ul><ul id="3664bc1c-663a-4dcb-9181-ee9f40878f6d" class="bulleted-list"><li style="list-style-type:disc"><a href="http://readme.md/">README.md</a>: Include a README file in your repository to provide information about the project, installation instructions, and usage guidelines.</li></ul><ul id="b04db6e4-35f7-4dfc-bcc3-ee5677abffa6" class="bulleted-list"><li style="list-style-type:disc">document your code and your commits very well </li></ul><ul id="d48bd08e-f158-4554-9807-86f1a1987136" class="bulleted-list"><li style="list-style-type:disc">don’t cross  other people’s branches , you can pull the image and work on it but in mergin and pushing push on your branch and if u need to add a feature make a branch locally work on it and add it as a feature </li></ul></li></ol><h3 id="7591e209-87f1-4075-ac32-ccdac7487c68" class="">Conflicts</h3><p id="f1ac0cf0-7cad-4864-aea1-2880411b65ab" class="">Don’t panic, when trying to merge or rebase a branch and conflicts are detected it only means that there are conflicting changes between different versions of the same file or files in your repository and they can be easily resolved (most times).</p><figure id="daa68229-8414-47cf-883e-6c87475109b6" class="image"><a href="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/0_yItQ1DiR5PLcd94T.jpg"><img style="width:500px" src="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/0_yItQ1DiR5PLcd94T.jpg"/></a></figure><p id="46593882-8426-442d-bb4a-e2fe54e5521e" class="">They are typically indicated within the affected files, where Git inserts conflict markers <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> to highlight the conflicting sections.</p><p id="6c52a25a-d541-4de8-85e4-635f2db3adba" class="">Decide which changes to keep, modify, or remove, ensuring that the resulting code makes sense and retains the intended functionality.</p><p id="f7422f1c-86e6-4daa-a7a3-f1f5dcbd5aa7" class="">After manually resolving conflicts in the conflicted files, remove the conflict markers <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> and adjust the code as necessary.</p><p id="70aff405-2954-4ac2-bba0-52005fba92ee" class="">Save the changes in the conflicted files once you&#x27;re satisfied with the resolution.</p><blockquote id="a49255cc-6ad2-4daa-a92f-d47eedc51516" class="">you have a code conflict talk to fatimaezzahrae </blockquote><p id="0489405b-13e0-4861-856f-29587a01a5e5" class="block-color-teal_background">there’s an order of merging provided by two ways : </p><ol type="1" id="8f966777-3a2b-4c67-a18b-bb76a46af87b" class="block-color-teal_background numbered-list" start="1"><li><strong>Resolving Merging Conflicts</strong><ul id="5cc25c1c-c49e-4622-aaa6-2ca345ef2f46" class="bulleted-list"><li style="list-style-type:disc">Pulling Changes: Always pull changes before pushing to avoid conflicts.</li></ul><ul id="3d188c66-46bf-4964-8ef8-4e4dd7b9e788" class="bulleted-list"><li style="list-style-type:disc">Resolving Conflicts: If conflicts occur during a merge, Git will prompt you to resolve them manually. Use <code>git status</code> to identify conflicted files, edit them to resolve conflicts, add changes, and commit the merge.</li></ul></li></ol><h3 id="567c94e1-6345-4777-ba1c-79af8259729a" class="">Gitflow Workflow 🌊</h3><p id="ddc46926-2550-4124-97f0-126f0764ff49" class="">Gitflow defines a strict branching model with predefined branches for different types of development tasks.</p><p id="fd4b5190-eb2e-4ef7-8417-0ff5537cf3c3" class="">It includes long-lived branches such as main, develop, feature branches, release branches, and hotfix branches.</p><p id="70193fe3-115a-4217-891c-a77b00ad5128" class="">//do not care about this now except if u are on the github ci/cd team</p><p id="2e0a2135-eb90-435d-9b6f-be24fc523565" class="">
+</p><h3 id="2429fb68-e0e9-44d2-9379-4bdcc967aabf" class="">What the fork?</h3><p id="b605ab30-0de7-46b2-a507-323c268d8933" class="">Forking is highly recommended for collaborating on Open Source projects since you have complete control over your own copy of the repository. You can make changes, experiment with new features, or fix bugs without affecting the original project.</p><blockquote id="433e40e1-bc0b-414e-992b-268149bfffbb" class="">💡 What took me a long time to figure out was that although forked repositories start as separate entities, they retain a connection to the original repository. This connection allows you to keep track of changes in the original project and synchronize your fork with updates made by others.</blockquote><p id="fd57e036-bb89-4e6b-8e40-7e0b89aa9069" class="">That’s why even when you push to your origin repository. Your changes will show up on the remote also.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><mark class="highlight-red">getting started :</mark></summary><div class="indented"><ol type="1" id="c049aab8-7667-4d7a-ab61-c9f2202d3c09" class="numbered-list" start="1"><li><mark class="highlight-teal"><strong>Tracking Code on Your Machine</strong></mark><ul id="94ce144e-da38-4047-8672-52dc57296591" class="bulleted-list"><li style="list-style-type:disc">Install Git: If you haven&#x27;t already, download and install Git from <a href="https://git-scm.com/">git-scm.com</a>.</li></ul><ul id="8a9242d5-0c70-4fb1-9d7c-4fd7ba7aad02" class="bulleted-list"><li style="list-style-type:disc">Configure Git: Set up your name and email using<ul id="a417fcd3-f9d8-49ac-ac5c-59087c4dce0a" class="bulleted-list"><li style="list-style-type:circle"> <code>git config --global user.name &quot;Your Name&quot;</code> </li></ul><ul id="9876a21f-d35c-4193-947c-64c4165f86f6" class="bulleted-list"><li style="list-style-type:circle"><code>git config --global user.email &quot;your.email@example.com&quot;</code>.</li></ul></li></ul><ul id="ed060ab4-e3a2-42ea-b924-2173f23c2bcb" class="bulleted-list"><li style="list-style-type:disc">Initialize a Repository: Navigate to your project directory and run <code>git init</code> to start tracking changes.</li></ul><ul id="eb8de59d-e9db-4a0c-bb35-0f503be82dcf" class="bulleted-list"><li style="list-style-type:disc">the <code> git add . </code> ”.” to add the changes made in all files or u can specify what to commit(look it up :) )</li></ul></li></ol><ol type="1" id="cf26dff0-ad71-4b57-ba37-bc84b558319b" class="numbered-list" start="2"><li><mark class="highlight-teal"><strong>Working with Git Repositories</strong></mark><ul id="6381cb47-cb12-4e8f-a115-645bc94b25da" class="bulleted-list"><li style="list-style-type:disc">Cloning a Repository: Use <code>git clone &lt;repository URL&gt;</code> to download a copy of a remote repository onto your local machine.</li></ul><ul id="49700544-15c9-4c70-84f6-93925efdfa79" class="bulleted-list"><li style="list-style-type:disc">Branching: Create a new branch to work on a specific feature or fix using <code>git checkout -b &lt;branch-name&gt;</code>.</li></ul><ul id="b377c01d-a0a5-45f2-b310-81a5c9b7c5a3" class="bulleted-list"><li style="list-style-type:disc">Checking Status: Use <code>git status</code> to see the current state of your repository.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7b3fc468-bb12-4ce3-8405-fba96c3fd4e4" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">git status
+</code></pre></li></ul><ul id="806c811d-93d3-4756-b2d6-477afc21cff2" class="bulleted-list"><li style="list-style-type:disc">Use <code>git log</code> to show a chronological list of commits, starting from the most recent commit and working backward in time</li></ul><ul id="b5f55112-1c30-456a-89af-8298cfa70079" class="bulleted-list"><li style="list-style-type:disc">git switch <p id="0063e227-7050-4f6e-8ec0-f689edc7ccbd" class="">To transition between branches use:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="75dd5ca7-b45e-49b8-97fc-c81d4b986c66" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">git switch
+</code></pre><p id="01789d86-78b4-48cb-aa37-2a6abfbdecac" class="">Additionally to transitioning between them, you can also use:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a337f837-be5a-40d7-b3fb-e71ebec1d192" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">git checkout
+# A shortcut to switch to a branch that is yet to be created with the -b flag
+git checkout -b feature-branch-name
+</code></pre></li></ul></li></ol><ol type="1" id="a5f80394-3ae5-43c7-9aa0-3f85b8c6ff8c" class="numbered-list" start="3"><li><mark class="highlight-teal"><strong>Pushing and Pulling</strong></mark><ul id="9d5ed528-9f4a-4084-b505-c293d0697ca4" class="bulleted-list"><li style="list-style-type:disc">Pulling Changes: Before starting your work, always pull the latest changes from the remote repository using <code>git pull</code>.</li></ul><ul id="38fc85db-4184-4139-ad9f-0e5f91dbbc18" class="bulleted-list"><li style="list-style-type:disc">Pushing Changes: After making changes locally, add them using <code>git add .</code>, commit with <code>git commit -m &quot;Your message&quot;</code>, and then push to the remote repository with </li></ul></li></ol><p id="2828c082-4912-4827-b138-06ee58b823b5" class="">To check the repository&#x27;s state, use:</p><p id="085b02bf-2889-4f84-adcb-603f3fa61c00" class="">
+</p><p id="7784cf70-bc03-4df2-bb83-f2bbe4640a5b" class="">If you have changes to your last commit, you don’t have to create another commit altogether, you can use the -—amend flag to amend the most recent commit with your staged changes</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="40e7be04-3275-4b79-8ec3-c9f1941f8cb2" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all"># make your changes
+git add .
+git commit --amend
+# This will open your default text editor to modify the commit message if needed.
+git push origin your_branch --force
+</code></pre><blockquote id="307efdfb-10a6-4b74-bcfe-e224e2a2baee" class="">⚠️ Exercise caution when utilizing --force, as it has the potential to overwrite the history of the target branch. Its application on the main/master branch should be generally avoided.<p id="0ab772ec-08e1-4754-b7a8-22e850f8fb6a" class="">As a rule of thumb it&#x27;s better to commit more often than not, to avoid losing progress or accidentally resetting the unstaged changes. One can rewrite the history afterward by squashing multiple commits or doing an interactive rebase.</p></blockquote><p id="8ecfc65a-8507-456c-92ae-9b036e658ed2" class="">
+</p><p id="5096b6c6-e196-4e21-969e-51224b5fa20d" class="">
+</p><p id="21623799-1522-470d-8d58-39dc3c0bf9f6" class="">wanna see the github branches and merges pattern , better check them on github repo → settings </p><p id="7404844d-ee21-434d-8713-b11dc84bfaff" class="">
+</p><ol type="1" id="eac96c6a-355b-4524-9d5c-65987780183e" class="block-color-teal_background numbered-list" start="1"><li><strong>Things to Consider Always</strong><ul id="8f4ca70e-9c74-4d73-8e0c-8734a784e42f" class="bulleted-list"><li style="list-style-type:disc">Commit Messages: Write clear and descriptive commit messages explaining the changes made.</li></ul><ul id="4c41306a-50ae-46f3-b921-0fd1be2ee334" class="bulleted-list"><li style="list-style-type:disc">Branch Naming: Use meaningful branch names that describe the purpose of the branch.</li></ul><ul id="be21161e-043f-4584-a40f-3464f414582f" class="bulleted-list"><li style="list-style-type:disc">Code Reviews: Utilize code reviews to maintain code quality and catch errors early.</li></ul><ul id="2ddbbd0f-3148-4479-9399-802a2340dbb0" class="bulleted-list"><li style="list-style-type:disc">Continuous Integration: Integrate automated testing and code analysis tools into your workflow to ensure code quality.</li></ul></li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><mark class="highlight-red">Git Cheatsheet:</mark></summary><div class="indented"><p id="e6597170-ba10-4c4e-8214-1de3a48b1e61" class=""><mark class="highlight-teal"><a href="https://ndpsoftware.com/git-cheatsheet.html#loc=stash">honestly this is all what you need</a></mark></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0651cfe1-1dcc-46a9-8f71-795fb612e2e8" class="code"><code class="language-PowerShell" style="white-space:pre-wrap;word-break:break-all"># Clone a Repository
+git clone &lt;repository_url&gt;
+
+# Stage Changes for Commit
+git add &lt;file(s)&gt;
+git add . #to add all 
+
+# Commit Changes
+git commit -m &quot;Commit message&quot;
+
+# Push Changes to the Remote Repository
+git push
+
+# Force Push Changes , use it after discussing the problem with fatimaezzahrae
+git push --force
+
+# Reset Working Directory to Last Commit
+git reset --hard
+
+# Create a New Branch
+git branch &lt;branch_name&gt;
+
+# Switch to a Different Branch
+git checkout &lt;branch_name&gt;
+
+# Merge Changes from Another Branch
+git merge &lt;branch_name&gt;
+
+# Rebase Changes onto Another Branch (use with caution)
+git rebase &lt;base_branch&gt;
+
+# View Status of Working Directory
+git status
+
+# View Commit History
+git log
+
+# Undo Last Commit (use with caution)
+git reset --soft HEAD^
+
+# Discard Changes in Working Directory
+git restore &lt;file(s)&gt;
+
+# Retrieve Lost Commit References
+git reflog
+
+# Interactive Rebase to Rearrange Commits
+git rebase --interactive HEAD~3
+
+# Pull changes from remote repo
+git pull &lt;remote_name&gt; &lt;branch_name&gt;
+
+# Fetch changes from remote repo
+git fetch &lt;remote_name&gt;
+
+
+git clone &lt;https://name-of-the-repository-link
+git branch &lt;branch-name
+git push -u &lt;remote&gt; &lt;branch-name
+git branch or git branch --list
+git checkout &lt;name-of-your-branch&gt;
+git checkout -b &lt;name-of-your-branch&gt;
+git status
+</code></pre><h2 id="20776030-5a36-4636-ba16-b62304abb690" class=""><mark class="highlight-teal_background">Resources</mark></h2><p id="4fabe9cd-93ba-45d3-aa93-5d0226689cbc" class="">
+</p><p id="e00300ad-6982-4885-b207-95bb3f6e6212" class=""><a href="https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html">https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html</a></p><p id="364fb0d8-7861-4c10-a9ee-cd3006740b79" class=""><a href="https://dev.to/glasskube/the-guide-to-git-i-never-had-1450?ref=dailydev">https://dev.to/glasskube/the-guide-to-git-i-never-had-1450?ref=dailydev</a></p><h3 id="28c42cf3-add2-45c6-9cd6-2d624b351a1f" class="">Additional Resources</h3><ul id="6a5e7a10-8691-4c88-b34b-e0756bd53210" class="bulleted-list"><li style="list-style-type:disc"><a href="https://docs.github.com/en">GitHub Documentation</a></li></ul><ul id="175637cf-537f-495c-ac83-7a8836aff47c" class="bulleted-list"><li style="list-style-type:disc"><a href="https://git-scm.com/doc">Git Documentation</a></li></ul><p id="18f316d3-d5f0-4a66-ac1e-5bfb6d667124" class="">, and try your best to adhere to <a href="https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13">commit message conventions</a>.</p><p id="a4c2810e-b530-427b-b0f4-b4bf5f979f86" class="">
+</p><figure id="02b31b42-5417-4a94-8e4f-50b4ed51a2d2" class="image"><a href="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/0_tmfbLDU_hIeg0B3B.jpg"><img style="width:240px" src="How%20to%20use%20Git%20and%20Github%20413b120c8274440da7cca126af697b1b/0_tmfbLDU_hIeg0B3B.jpg"/></a></figure><p id="c535b4b1-22b8-46be-b2d7-86298d6c31c5" class="">for god’s sake don’t do this </p><p id="a241667d-39a4-4928-a288-c54d86529b90" class="">taouil fatimaezzahrae</p></div></details></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
